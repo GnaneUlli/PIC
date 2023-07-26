@@ -24,44 +24,49 @@ void Lcd_command(unsigned char);
 void Lcd_data(unsigned char);
 unsigned char name[15]={"HELLO WORLD"};
 unsigned char x,i;
+
+/*Declaration of necessary function prototypes and variables*/
+
 void main(){
     init();
-    Lcd_command(0x80);
-    for(x=0;x<=11;x++){
-        Lcd_data(name[x]);
+    Lcd_command(0x83);
+    for(x=0;x<=11;x++)
+    {
+        Lcd_data(name[x]);//sending data to lcd 
     }
     while(1);
 }
 
-void init(){
-    TRISC=0xF6;
-    TRISD=0x00;
-    Lcd_command(0x38);
+void init()
+{
+    TRISC=0xF6;//set pin RC0 and RC3 as output
+    TRISD=0x00;//data flow through all pins in port d
+    Lcd_command(0x38);//as per Lcd flow
     __delay_ms(100);
     Lcd_command(0x38);
     __delay_ms(100);
     Lcd_command(0x38);
     __delay_ms(100);
-    Lcd_command(0x38);
+    Lcd_command(0x38);//To set number of lines and character display
     __delay_ms(100);
-    Lcd_command(0x06);
+    Lcd_command(0x06);//To set starting and moving position
     __delay_ms(100);
-    Lcd_command(0x0C);
+    Lcd_command(0x0C);//Cursor or display shift
     __delay_ms(100);
-    Lcd_command(0x01);
+    Lcd_command(0x01);// To clear display
     __delay_ms(100);
 }
 void Lcd_data(unsigned char i){
-    PORTC|=0x08;
+    PORTC|=0x08;//set to data mode
     PORTD=i;
-    PORTC|=0x01;
-    PORTC&=~0x01;
+    PORTC|=0x01;//Enable to on
+    PORTC&=~0x01;//Enable to off
     __delay_ms(100);
 }
 void Lcd_command(unsigned char i){
-    PORTC&=~0x08;
+    PORTC&=~0x08;//set to command mode
     PORTD=i;
-    PORTC|=0x01;
-    PORTC&=~0x01;
-    delay_ms(100);
+    PORTC|=0x01;//Enable on 
+    PORTC&=~0x01;//Enable off
+    __delay_ms(100);
 }
