@@ -22,7 +22,7 @@
 void init();
 void Lcd_command(unsigned char);
 void Lcd_data(unsigned char);
-unsigned char name[15]={"Hello World"};
+unsigned char name[15]={"HELLO WORLD"};
 unsigned char x,i;
 void main(){
     init();
@@ -34,8 +34,8 @@ void main(){
 }
 
 void init(){
-    PORTC=0x00;
-    PORTD=0x00;
+    TRISC=0xF6;
+    TRISD=0x00;
     Lcd_command(0x38);
     __delay_ms(100);
     Lcd_command(0x38);
@@ -56,10 +56,12 @@ void Lcd_data(unsigned char i){
     PORTD=i;
     PORTC|=0x01;
     PORTC&=~0x01;
+    __delay_ms(100);
 }
 void Lcd_command(unsigned char i){
-    PORTC|=~0x08;
+    PORTC&=~0x08;
     PORTD=i;
     PORTC|=0x01;
     PORTC&=~0x01;
+    delay_ms(100);
 }
