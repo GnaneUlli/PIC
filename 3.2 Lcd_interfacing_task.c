@@ -16,8 +16,7 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
-
-#define _XTAL_FREQ 6000000
+#define _XTAL_FREQ 600000
 
 void init();
 void Lcd_data(unsigned char);
@@ -36,11 +35,8 @@ void main(){
     for (n = 0; n < 11; n++) {
         Lcd_data(My_name[n]); // Print characters in reverse order
     }
-    
     while (1);
-
 }
-
 void init()
 {
     TRISC=0xF6;//set pin RC0 and RC3 as output
@@ -68,7 +64,6 @@ void Lcd_data(unsigned char i) {
     PORTC &= ~0x01; // Enable (E) off
     __delay_ms(100);
 }
-
 void Lcd_command(unsigned char i) {
     PORTC &= ~0x08; // Set RS (Register Select) to 0 for command mode
     PORTD = i;
