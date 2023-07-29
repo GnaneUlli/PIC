@@ -1,7 +1,6 @@
 // PIC16F877A Configuration Bit Settings
 
 // 'C' source line config statements
-
 // CONFIG
 #pragma config FOSC = EXTRC     // Oscillator Selection bits (RC oscillator)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
