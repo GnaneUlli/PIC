@@ -15,7 +15,6 @@
 // Use project enums instead of #define for ON and OFF.
 
 #include <xc.h>
-
 #define _XTAL_FREQ 6000000 //crystal frequency
 
 void main(){
