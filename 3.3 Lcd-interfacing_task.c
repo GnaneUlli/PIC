@@ -65,7 +65,6 @@ void Lcd_data(unsigned char i) {
     PORTC &= ~0x01; // Enable off
     __delay_ms(100);
 }
-
 void Lcd_command(unsigned char i) {
     PORTC &= ~0x08; // Set RS to 0 for command mode
     PORTD = i;
