@@ -3,6 +3,7 @@
 // 'C' source line config statements
 
 // CONFIG
+
 #pragma config FOSC = EXTRC     // Oscillator Selection bits (RC oscillator)
 #pragma config WDTE = OFF       // Watchdog Timer Enable bit (WDT disabled)
 #pragma config PWRTE = OFF      // Power-up Timer Enable bit (PWRT disabled)
