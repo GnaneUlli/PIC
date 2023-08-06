@@ -38,6 +38,7 @@ void main(){
 }
 
 void set()
+
 {
     TRISC=0xF6;//set pin RC0 and RC3 as output
     TRISD=0x00;//data flow through all pins in port d
