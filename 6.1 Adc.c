@@ -69,3 +69,55 @@ void init()
     Lcd_command(0x01);// To clear display
     __delay_ms(10);
 }
+
+void Lcdoutput(unsigned int i){
+    unsigned char s;
+    j=1;
+    m=i;
+    while(m!=0){
+    s=m-((m/10)*10);
+    k[j]=s;
+    j++;
+    m=m/10;
+    }
+    k[j]='\0';
+    j=j-1;
+    
+    if(k[3]>0){
+        n=0x30+k[3];
+        Lcd_data(n);
+    }else{
+        Lcd_data(0x30);
+    }
+     if(k[2]>0){
+        n=0x30+k[2];
+        Lcd_data(n);
+    }else{
+        Lcd_data(0x30);
+    }
+    
+    
+    n=0x30+k[1];
+    Lcd_data(n);
+    Lcd_data(0x56);
+
+}
+void Lcd_data(unsigned char i){
+    
+    PORTC|=0x08;//set to data mode
+    PORTD=i;
+    PORTC|=0x01;//Enable to on
+    PORTC&=~0x01;//Enable to off
+    __delay_ms(10);
+    
+}
+void Lcd_command(unsigned char i){
+    
+    PORTC&=~0x08;//set to command mode
+    PORTD=i;
+    PORTC|=0x01;//Enable on 
+    PORTC&=~0x01;//Enable off
+    __delay_ms(10);
+    
+}
+
