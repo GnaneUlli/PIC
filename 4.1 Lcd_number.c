@@ -1,5 +1,4 @@
 // PIC16F877A Configuration Bit Settings
-
 // 'C' source line config statements
 
 // CONFIG
