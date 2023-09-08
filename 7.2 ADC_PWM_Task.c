@@ -66,3 +66,87 @@ void main(){
         __delay_ms(100);
     }
 }
+
+void set_flow()
+{
+    TRISA=0x02;         //Set A2 as input remaining as output
+    TRISC=0x00;         //Set pin RC0 to RC7  as output
+    TRISD=0x00;         //data flow through all pins in port d
+    TRISE=0x02;          //Set A6 as input in Port E.
+    ADCON0=0x89;        //set the adc flow
+    ADCON1=0x80;        //set to Right justified 
+    CCP1CON=0x3C;       //To set pwm flow
+    CCPR1L=0x2E;  
+    T2CON=0x06;          //Timer register
+    PR2=0x5E;           //to set period
+    command_mode(0x38);  //as per Lcd flow
+    __delay_ms(10);
+    command_mode(0x38);
+    __delay_ms(10);
+    command_mode(0x38);
+    __delay_ms(10);
+    command_mode(0x38);  //To set number of lines and character display
+    __delay_ms(10);
+    command_mode(0x06);  //To set starting and moving position
+    __delay_ms(10);
+    command_mode(0x0C);  //Cursor or display shift
+    __delay_ms(10);
+    command_mode(0x01);  // To clear display
+    __delay_ms(10);
+}
+void Lcdoutput(unsigned int i){
+    unsigned char s;
+    j=1;
+    m=i;
+    while(m!=0){
+    s=m-((m/10)*10);
+    k[j]=s;
+    j++;
+    m=m/10;
+    }
+    k[j]='\0';
+    j=j-1;
+    if(k[4]>0){
+        n=0x30+k[4];
+        data_mode(n);
+    }
+    else{
+        data_mode(0x20);
+    }
+    if(k[3]>=0){
+        n=0x30+k[3];
+        data_mode(n);
+    }
+    else{
+        data_mode(0x20);
+    }
+    if(k[2]>=0){
+        n=0x30+k[2];
+        data_mode(n);
+    }
+    else{
+        data_mode(0x20);
+    }
+    n=0x30+k[1];
+    data_mode(n);
+    data_mode(0x56);
+
+}
+void data_mode(unsigned char i){
+    
+    PORTC|=0x08;//set to data mode
+    PORTD=i;
+    PORTC|=0x01;//Enable to on
+    PORTC&=~0x01;//Enable to off
+    __delay_ms(10);
+    
+}
+void command_mode(unsigned char i){
+    
+    PORTC&=~0x08;//set to command mode
+    PORTD=i;
+    PORTC|=0x01;//Enable on 
+    PORTC&=~0x01;//Enable off
+    __delay_ms(10);
+    
+}
