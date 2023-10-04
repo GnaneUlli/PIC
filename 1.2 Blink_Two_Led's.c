@@ -28,7 +28,7 @@ void main(){
        // PORTDbits.RD1=1;
         __delay_ms(3000);
         PORTD=0x00;
-        //PORTDbits.RD1=0;
+        //PORTD=0x00;
         __delay_ms(3000);
         PORTD=0x02;
         //PORTDbits.RD1=1;
