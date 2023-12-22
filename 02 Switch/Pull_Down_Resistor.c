@@ -21,22 +21,23 @@
 
 void main(){
     unsigned char x;
-    TRISB=0x00;  //Making all pins as  output
-    TRISC=0x00;  //Making RC0 to RC7 as output
-    PORTB=0x00;  //set all port b pins off
+    TRISD=0xDB;  //Making all pins as  output
+    TRISC=0x0F;  //Making RC0 to RC7 as output
+    PORTD=0x00;  //set all port b pins off
     PORTC=0x00;  //set all port c pins off
     while(1){
         x=PORTB;
         switch(x){
-            case 0x01:  PORTC=0x02; //Make RC1 on  and RC7 off.
+            case 0x0E:  PORTC=0x02; //Make RC1 on  and RC7 off.
             break;
-            case 0x02:  PORTC=0x82; //Make RC1 on and RC7 on.
+            case 0x0D:  PORTC=0x82; //Make RC1 on and RC7 on.
             break;
-            case 0x04:  PORTC=0x80; //Make RC1 off and RC7 on 
+            case 0x0B:  PORTC=0x80; //Make RC1 off and RC7 on 
             break;
-            case 0x08:  PORTC=0x00; //Make RC1 and RC7 off
+            case 0x07:  PORTC=0x00; //Make RC1 and RC7 off
             break;
             case 0x00:  PORTC=0x00; //Set to normal state.
             break;
         }
     }
+}
